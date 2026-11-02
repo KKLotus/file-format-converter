@@ -1,0 +1,21 @@
+# Python 缓存与构建产物
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# 依赖目录：由「安装依赖.bat」/「启动服务器.bat」自动安装，无需提交
+deps/
+
+# 服务端运行时临时文件
+miniprogram/server/work/
+work/
+
+# 微信开发者工具
+miniprogram/project.private.config.json
+miniprogram/node_modules/
+
+# 系统与日志
+.DS_Store
+Thumbs.db
+*.log

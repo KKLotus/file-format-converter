@@ -1,0 +1,87 @@
+<view class="page">
+  <view class="hero">
+    <view class="hero-title">批量文件格式转换</view>
+    <view class="hero-sub">图像 · 音频 · 视频 · 文档 · 压缩包</view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">服务器地址</view>
+    <view class="server-row">
+      <input
+        class="server-input"
+        value="{{server}}"
+        bindinput="onServerInput"
+        placeholder="http://192.168.1.100:5000"
+        confirm-type="done"
+      />
+      <button class="btn-save" size="mini" bindtap="saveServer">保存</button>
+    </view>
+    <view class="hint">真机测试请填写电脑局域网 IP；正式发布需使用 HTTPS 合法域名</view>
+    <view class="meta-row">
+      <text class="meta">单文件上限 {{maxMb}}MB</text>
+      <text class="meta">结果保留 1 小时</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">添加文件</view>
+    <view class="pick-row">
+      <button class="pick-btn" bindtap="chooseFiles">选择聊天文件</button>
+      <button class="pick-btn ghost" bindtap="chooseMedia">选择图片 / 视频</button>
+    </view>
+    <view class="hint" wx:if="{{!files.length}}">
+      支持 png/jpg/webp、mp3/wav、mp4/mkv、pdf/docx/txt、zip/tar 等常见格式
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{files.length}}">
+    <view class="card-head">
+      <view class="card-title">待转换 {{files.length}} 个</view>
+      <view class="link" bindtap="clearAll">清空</view>
+    </view>
+
+    <view class="file-item" wx:for="{{files}}" wx:key="id">
+      <view class="file-row">
+        <view class="file-name">{{item.name}}</view>
+        <view class="file-del" data-id="{{item.id}}" bindtap="removeFile">删除</view>
+      </view>
+      <view class="file-meta">
+        <text class="tag">{{item.categoryText}}</text>
+        <text class="size">{{item.sizeText}}</text>
+        <text class="arrow">→</text>
+        <picker
+          class="picker"
+          range="{{item.options}}"
+          value="{{item.targetIndex}}"
+          data-id="{{item.id}}"
+          bindchange="onTargetChange"
+        >
+          <view class="target">{{item.target}} ▾</view>
+        </picker>
+        <text class="status {{item.statusClass}}">{{item.status}}</text>
+      </view>
+    </view>
+
+    <button class="btn-main" disabled="{{busy}}" bindtap="startConvert">{{busy ? '转换中…' : '开始转换'}}</button>
+  </view>
+
+  <view class="card" wx:if="{{results.length}}">
+    <view class="card-title">转换结果</view>
+    <view
+      class="result-item"
+      wx:for="{{results}}"
+      wx:key="url"
+      data-index="{{index}}"
+      bindtap="openResult"
+    >
+      <view class="result-main">
+        <view class="result-name">{{item.name}}</view>
+        <view class="result-size">{{item.sizeText}}</view>
+      </view>
+      <view class="result-action">{{item.actionText}}</view>
+    </view>
+    <view class="hint">PDF/Word 可直接打开，图片/视频保存到相册，音频与压缩包复制链接到电脑下载</view>
+  </view>
+
+  <view class="log" wx:if="{{log}}">{{log}}</view>
+</view>

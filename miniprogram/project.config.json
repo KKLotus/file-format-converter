@@ -1,0 +1,26 @@
+{
+  "description": "批量文件格式转换小程序",
+  "appid": "touristappid",
+  "projectname": "文件格式转换小程序",
+  "miniprogramRoot": "./",
+  "compileType": "miniprogram",
+  "libVersion": "3.4.0",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "useCompilerModule": true
+  },
+  "condition": {
+    "miniprogram": {
+      "list": []
+    }
+  }
+}
